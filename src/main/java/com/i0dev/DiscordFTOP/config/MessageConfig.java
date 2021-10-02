@@ -20,6 +20,7 @@ public class MessageConfig extends AbstractConfiguration {
     String ForcedDiscordSend = "&7You have forced ftop to send in discord!";
     String toggleAutoFTop = "&7You have toggled automatic placements to: {status}";
     String toggleAutoFTopDiscord = "You have toggled automatic placements to: {status}";
+    String discordNoPermission = "You do not have permission to run this command. You need the permission: {permission}";
 
     String reloadedConfig = "&7You have&a reloaded&7 the configuration.";
     String noPermission = "&cYou don not have permission to run that command.";

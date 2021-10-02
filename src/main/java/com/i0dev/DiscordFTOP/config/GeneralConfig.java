@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import net.dv8tion.jda.api.Permission;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +24,7 @@ public class GeneralConfig extends AbstractConfiguration {
     public char botPrefix = '.';
     public long fTopChannel = 793715082881662986L;
     public boolean autoFTopEnabled = true;
+    public String discordPermissionRequiredToToggleFTOP = "ADMINISTRATOR";
 
     List<String> autoFTopClockEndingSendTimes = Arrays.asList(
             "00",

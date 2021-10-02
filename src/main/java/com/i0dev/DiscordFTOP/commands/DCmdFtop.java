@@ -6,6 +6,7 @@ import com.i0dev.DiscordFTOP.config.MessageConfig;
 import com.i0dev.DiscordFTOP.managers.DiscordManager;
 import com.i0dev.DiscordFTOP.templates.AbstractManager;
 import com.i0dev.DiscordFTOP.utility.ConfigUtil;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class DCmdFtop extends AbstractManager {
@@ -21,6 +22,12 @@ public class DCmdFtop extends AbstractManager {
         if (e.getMessage().getContentRaw().equalsIgnoreCase(cnf.getBotPrefix() + "ftop"))
             e.getMessage().replyEmbeds(heart.getManager(DiscordManager.class).getFtopEmbed()).queue();
         else if (e.getMessage().getContentRaw().equalsIgnoreCase(cnf.getBotPrefix() + "ftopToggle")) {
+            if (e.getGuild() == null) return;
+            if (!e.getMember().hasPermission(Permission.valueOf(cnf.discordPermissionRequiredToToggleFTOP))) {
+                e.getMessage().reply(heart.getConfig(MessageConfig.class).getDiscordNoPermission().replace("{permission}", cnf.discordPermissionRequiredToToggleFTOP)).queue();
+                return;
+            }
+
             if (cnf.autoFTopEnabled) cnf.setAutoFTopEnabled(false);
             else cnf.setAutoFTopEnabled(true);
             ConfigUtil.save(cnf, cnf.path);
