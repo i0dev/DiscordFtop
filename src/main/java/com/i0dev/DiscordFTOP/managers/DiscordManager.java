@@ -57,7 +57,7 @@ public class DiscordManager extends AbstractManager {
             int iterator = 1;
             StringBuilder content = new StringBuilder();
             for (String factionID : data.keySet()) {
-                if (iterator >= cnf.getTopFactionCount() + 1) break;
+                if (iterator >= 11) break;
                 com.massivecraft.factions.entity.Faction faction = com.massivecraft.factions.entity.Faction.get(factionID);
                 if (faction == null) continue;
                 if (data.get(factionID).getTotalSpawnerValue() <= 0) continue;
@@ -113,7 +113,7 @@ public class DiscordManager extends AbstractManager {
     @SneakyThrows
     @Override
     public void initialize() {
-        if (createJDA() == null) return;
+        createJDA();
         GeneralConfig cnf = heart.getConfig(GeneralConfig.class);
         String activity = cnf.getBotActivity();
         switch (cnf.getBotActivityState().toLowerCase()) {
@@ -149,19 +149,17 @@ public class DiscordManager extends AbstractManager {
     public static JDA jda = null;
 
     @SneakyThrows
-    public JDA createJDA() {
+    public void createJDA() {
         try {
             jda = JDABuilder.create(heart.getConfig(GeneralConfig.class).botToken, GatewayIntent.GUILD_MESSAGES)
                     .setStatus(OnlineStatus.fromKey(heart.getConfig(GeneralConfig.class).botActivityType))
                     .setContextEnabled(true)
                     .build()
                     .awaitReady();
-
         } catch (Exception ignored) {
             Bukkit.getLogger().severe("Could not load DiscordFTOP. Please make sure the token is correct in config, then force reload the plugin.");
             heart.onDisable();
         }
-        return jda;
     }
 
 }
