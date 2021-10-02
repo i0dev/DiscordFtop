@@ -1,0 +1,28 @@
+name: ${project.build.finalName}
+main: com.i0dev.DiscordFTOP.Heart
+version: ${project.version}
+author: i01
+description: This plugin allows you to send the factions top leaderboard to a channel in discord!
+website: ${project.url}
+softdepend:
+  - Factions
+  - PlaceHolderAPI
+depend:
+  - NBTAPI
+commands:
+  discordFTOP:
+    aliases:
+      - discordFactionsTop
+    description: The main command
+    usage: /discordFTOP <force/reload/toggle>
+
+permissions:
+  discordftop.reload:
+    description: Reload config
+    default: op
+  discordftop.force:
+    description: Force send the ftop
+    default: op
+  discordftop.toggle:
+    description: toggles automatic ftop
+    default: op
