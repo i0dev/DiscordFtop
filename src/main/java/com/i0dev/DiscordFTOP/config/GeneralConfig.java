@@ -31,6 +31,7 @@ public class GeneralConfig extends AbstractConfiguration {
             "30"
     );
 
+    boolean publishFTopMessage = true;
     long topFactionCount = 10;
 
     String embedTitle = "Factions Top Placements";
