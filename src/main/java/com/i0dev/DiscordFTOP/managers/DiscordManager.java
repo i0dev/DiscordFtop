@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -38,7 +39,9 @@ public class DiscordManager extends AbstractManager {
             return;
         }
 
-        channel.sendMessageEmbeds(getFtopEmbed()).complete().crosspost();
+        Message msg = channel.sendMessageEmbeds(getFtopEmbed()).complete();
+        if (cnf.isPublishFTopMessage())
+            msg.crosspost().queue();
 
     }
 
