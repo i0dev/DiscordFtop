@@ -142,7 +142,7 @@ public class DiscordManager extends AbstractManager {
         if (!cnf.isAutoFTopEnabled()) return;
         List<String> minutes = cnf.getAutoFTopClockEndingSendTimes();
         ZonedDateTime time = ZonedDateTime.ofInstant(Instant.ofEpochMilli(System.currentTimeMillis()), ZoneId.of("America/New_York"));
-        if (minutes.contains(time.getMinute() + "") && System.currentTimeMillis() > lastSentFTopTime + (120 * 1000)) {
+        if (minutes.contains(time.getMinute() == 0 ? "00" : time.getMinute() + "") && System.currentTimeMillis() > lastSentFTopTime + (120 * 1000)) {
             sendFTopUpdate();
             lastSentFTopTime = System.currentTimeMillis();
         }
